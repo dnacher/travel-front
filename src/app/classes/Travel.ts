@@ -1,11 +1,10 @@
-import {Calling} from "./Calling";
-import {Organization} from "./Organization";
+import {Flight} from "./Flight";
 
-export class ChurchMember {
+export class Travel {
     id: number;
-    name: string;
-    surname: string;
-    fullname: string;
-    calling: Calling = new Calling();
-    organization: Organization = new Organization();
+    passengerName: String;
+    passengerBirthDate: Date;
+    passport: String;
+    email: String;
+    flights: Flight[];
 }

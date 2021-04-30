@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  title = "BMA";
+  title = "Travel App";
 
   constructor() { }
 

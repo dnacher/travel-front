@@ -1,0 +1,24 @@
+<nav>
+  <ul>
+    <li>
+      <a routerLink="" [class.activated] = "currentUrl == '/'">
+        <i class="material-icons">home</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="flights" [class.activated] = "currentUrl == '/flights'">
+        <i class="material-icons">flight_takeoff</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="airports" [class.activated] = "currentUrl == '/airports'">
+        <i class="material-icons">track_changes</i>
+      </a>
+    </li>
+    <li>
+      <a routerLink="travels" [class.activated] = "currentUrl == '/travels'">
+        <i class="material-icons">work_outline</i>
+      </a>
+    </li>
+  </ul>
+</nav>

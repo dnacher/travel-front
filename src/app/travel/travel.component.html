@@ -1,0 +1,72 @@
+      <!-- Beginning Part -->
+      <div class="row">
+        <div class="col">
+          <h1>Viajes</h1><br>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+
+      <div>
+
+          <div class="col-5">
+            <label for="nombre">Nombre Pasajero: </label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="travel.passengerName" name="name" required>
+          </div>
+        <div class="col-5">
+        <label for="datePicker">Fecha Nacimiento</label>
+          <input id="datePicker" type="date"
+                 placeholder="Datepicker"
+                 class="form-control"
+                 [(ngModel)]="travel.passengerBirthDate"
+                 [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="col-5">
+            <label for="passport">Pasaporte: </label>
+            <input type="text" class="form-control" id="passport" [(ngModel)]="travel.passport" name="name" required>
+        </div>
+          <div class="col-5">
+            <label for="email">Email: </label>
+            <input type="text" class="form-control" id="email" [(ngModel)]="travel.email" name="name" required>
+          </div>
+        </div>
+        <div class="col-5">
+          <label for="flight">Vuelos</label>
+          <div *ngIf="flights !=null" class="ng-input">
+            <ng-select id="flight" [items]="flights"
+                       [(ngModel)]="flightSelected"
+                        bindLabel="airportArrival.name">
+              <ng-template ng-option-tmp let-item="item" let-search="searchTerm">
+                {{item.airportArrival.name}} | {{item.arrivalDate | date:'yyyy-MM-dd'}}
+              </ng-template>
+            </ng-select>
+          </div><br>
+          <button style="text-align: left" class="btn btn-success" mat-button (click)="addFlight()">agregar</button>
+        </div>
+      <br>
+      <br>
+      <table class="table table-hover">
+        <thead>
+        <tr class="table-primary">
+          <th scope="col">Aerolinea</th>
+          <th scope="col">Aeropuerto Salida</th>
+          <th scope="col">Aeropuerto Llegada</th>
+          <th scope="col">Fecha Llegada</th>
+          <th scope="col">Fecha Salida</th>
+          <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table-light" *ngFor="let flight of travel.flights">
+          <td><a routerLink="/discourses/{{flight.id}}">{{flight.airline}}</a></td>
+          <td>{{flight.airportDeparture.name}}</td>
+          <td>{{flight.airportArrival.name}}</td>
+          <td>{{flight.departureDate | date:'yyyy-MM-dd'}}</td>
+          <td>{{flight.arrivalDate | date:'yyyy-MM-dd'}}</td>
+          <td><button class="btn btn-danger" (click)="deleteFlight(flight)"><i class="fa fa-trash"></i></button></td>
+        </tr>
+        </tbody>
+      </table>
+    <div>
+      <button style="text-align: left" class="btn btn-success" mat-button (click)="save()">Guardar</button>
+    </div>

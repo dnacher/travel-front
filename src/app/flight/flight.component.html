@@ -1,0 +1,120 @@
+
+<div class="container">
+  <!--Header Row-->
+  <div class="row">
+    <div class="col">
+      <h1>Vuelos</h1><br>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Aeropuerto Salida</label>
+      <div *ngIf="airports !=null" class="ng-input">
+        <ng-select id="airportDeparture" [items]="airports"
+                   bindLabel="name"
+                   [(ngModel)]="flight.airportDeparture">
+        </ng-select>
+      </div>
+    </div>
+    <div class="col-5">
+      <label>Aeropuerto Llegada</label>
+      <div *ngIf="airports !=null" class="ng-input">
+        <ng-select id="airportArrival" [items]="airports"
+                   bindLabel="name"
+                   [(ngModel)]="flight.airportArrival">
+        </ng-select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Fecha Salida</label>
+        <input id="datePickerDeparture" type="date"
+               placeholder="Datepicker"
+               class="form-control"
+               [(ngModel)]="flight.departureDate">
+    </div>
+    <div class="col-5">
+      <label>Fecha Llegada</label>
+        <input id="datePickerArrival" type="date"
+               placeholder="Datepicker"
+               class="form-control"
+               [(ngModel)]="flight.arrivalDate">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <label>Aerolinea</label>
+      <input id="Airline" type="text"
+             class="form-control"
+             [(ngModel)]="flight.airline">
+    </div>
+    <div class="col-5">
+      <br>
+      <button type="button" class="btn btn-success" (click)="saveAirline()">Guardar Aerolinea</button>
+    </div>
+  </div>
+
+
+  <!--End Header Row-->
+
+  <!--  Body row-->
+  <div *ngIf="!(isLoading)">
+    <div class="row">
+      <div class="col-xl-12">
+        <br>
+        <div>
+          <table class="table table-hover">
+            <thead>
+            <tr class="table-primary">
+              <th scope="col">Id</th>
+              <th scope="col">Aeropuerto Salida</th>
+              <th scope="col">Aeropuerto Llegada</th>
+              <th scope="col">Fecha Salida</th>
+              <th scope="col">Fecha llegada</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light" *ngFor="let flight of flights | paginate: {itemsPerPage: 10, currentPage: currentPage}">
+                <td>{{flight.id}}</td>
+                <td>{{flight.airportDeparture.name}}</td>
+                <td>{{flight.airportArrival.name}}</td>
+                <td>{{flight.departureDate | date :  "dd-MM-yyyy hh:mm"}}</td>
+                <td>{{flight.arrivalDate | date :  "dd-MM-yyyy hh:mm"}}</td>
+                <td><button class="btn btn-danger" (click)="deleteFlight(flight)"><i class="fa fa-trash"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls  class="paginator"
+                                [responsive]="true"
+                               (pageChange)="currentPage = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+    <!--End Body Row-->
+
+    <!--Footer Row-->
+    <div class="row">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+    <!--End Footer Row-->
+    </div>
+    <!--End Loading Area-->
+
+  <!--Spinner-->
+  <div *ngIf="isLoading" >
+    <ngx-spinner  bdColor="rgba(51,51,51,0.7)"
+                  size="large"
+                  color="#5ebef5"
+                  type="ball-atom">
+                  <p style="font-size: 20px; color: white"><br>Evaluando Aeropuertos</p>
+    </ngx-spinner>
+  </div>
+  <!--End of Spinner-->
+</div>
+<!--End of Container-->

@@ -1,8 +1,5 @@
-import {ChurchMember} from "./ChurchMember";
-
-export class Attendance {
+export class Airport {
     id: number;
-    churchMember: ChurchMember;
-    attended: boolean;
-    date: Date;
+    name: number;
+    country: String;
 }

@@ -1,0 +1,36 @@
+<h1>Aeropuertos</h1>
+<div class="row">
+  <div class="col-5">
+      <label for="nombre">Nombre: </label>
+      <input type="text" class="form-control" id="nombre" [(ngModel)]="airport.name" name="name" required>
+  </div>
+  <div class="col-5">
+    <label for="pais">Pais: </label>
+    <input type="text" class="form-control" id="pais" [(ngModel)]="airport.country" name="name" required>
+  </div>
+  </div><br>
+    <button type="submit" class="btn btn-success" (click)="onSubmit()">Agregar Aeropuerto</button>
+  <div *ngIf="airports !=null" class="opacity" style="opacity: 0.9;">
+    <br>
+   <table class="table table-hover">
+     <thead>
+     <tr class="table-primary">
+       <th scope="col">Nombre</th>
+       <th scope="col">Pais</th>
+       <th scope="col">Eliminar</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr class="table-light" *ngFor="let airport of airports | paginate: {itemsPerPage: 10, currentPage: currentPage}">
+       <td><a routerLink="/members/{{airport.id}}">{{airport.name}}</a></td>
+       <td>{{airport.country}}</td>
+       <td><button class="btn btn-danger" (click)="delete(airport)"><i class="fa fa-trash"></i></button></td>
+     </tr>
+     </tbody>
+   </table>
+   <pagination-controls class="paginator" (pageChange)="currentPage = $event"></pagination-controls>
+ </div>
+ <div *ngIf="airports == null">
+   <br><br>
+  <h3>No hay aeropuertos para mostrar</h3>
+</div>
